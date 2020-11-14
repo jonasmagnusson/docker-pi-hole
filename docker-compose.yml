@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    hostname: pi-hole
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    environment:
+      TZ: 'Europe/Stockholm'
+      WEBPASSWORD: 'Password'
+      DNS1: '9.9.9.9'
+      DNS2: '149.112.112.112'
+      DNSSEC: 'true'
+      CONDITIONAL_FORWARDING: 'true'
+      CONDITIONAL_FORWARDING_IP: '192.168.1.1'
+    volumes:
+      - './config/:/etc/pihole/'
+      - './data/:/etc/dnsmasq.d/'
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
