@@ -17,17 +17,21 @@ Use the following commands to control the container:
 
 ```bash
 # Run Docker container
-docker-compose up --detach
-```
+sudo docker-compose up --detach
 
-```bash
 # Restart Docker container
-docker-compose restart
+sudo docker-compose restart
+
+# Stop Docker container
+sudo docker-compose down
 ```
+
+To change the password while the container is running:
 
 ```bash
-# Stop Docker container
-docker-compose down
+# Change password
+docker exec -it pihole pihole -a -p newpassword
 ```
 
-Data is persistent and stored in the folders `data` and `config`.
+Data is persistent and stored in the folder `data`. Make sure to run docker with sudo or change permissions on the data folder accordingly.
+
